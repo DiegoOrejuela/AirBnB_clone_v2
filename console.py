@@ -14,7 +14,7 @@ from shlex import split
 
 
 class HBNBCommand(cmd.Cmd):
-    """this class is entry point of the command interpreter
+    """class is entry point of the command interpreter
     """
     prompt = "(hbnb) "
     all_classes = {"BaseModel", "User", "State", "City",
