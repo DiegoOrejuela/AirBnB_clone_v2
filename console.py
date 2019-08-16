@@ -41,14 +41,28 @@ class HBNBCommand(cmd.Cmd):
         try:
             if not line:
                 raise SyntaxError()
-            my_list = line.split(" ", 1)
+            my_list = split(line)
+            dict_atri = {}
 
-            obj = eval("{}({})".format(my_list[0],
-                                       my_list[1].replace(" ", ", ")))
+            obj = eval(my_list[0])()
+
+            for elem in my_list:
+                if "=" in elem:
+                    key = elem.split("=")[0]
+                    value_temp = elem.split("=")[1].replace("_", " ")
+                    try:
+                        if "." in value_temp:  # check if is posible float
+                            value = float(value_temp)
+                            setattr(obj, key, value)
+                        else:
+                            value = int(value_temp)  # check if is posible int
+                            setattr(obj, key, value)
+                    except:
+                        value = value_temp  # assign value how string
+                        setattr(obj, key, value)
+
             obj.save()
-
             print("{}".format(obj.id))
-
         except SyntaxError:
             print("** class name missing **")
         except NameError:
