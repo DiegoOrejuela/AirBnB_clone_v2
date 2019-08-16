@@ -2,6 +2,8 @@
 """This is the place class"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy.orm import relationship
+import os
 
 
 class Place(BaseModel, Base):
@@ -31,3 +33,16 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     amenity_ids = []
+
+    Try:
+        if os.environ["HBNB_TYPE_STORAGE"] == "db":
+            reviews = relationship('Review', cascade='save-update, merge, delete',
+                                   backref='place')
+    except:
+        @property
+        def reviews(self):
+            """list all cities with relationship
+            """
+            for key, value in models.storage.all(Review).items():
+                if self.id == value.place_id:
+                    list_reviews.append(value)
