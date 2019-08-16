@@ -41,27 +41,10 @@ class HBNBCommand(cmd.Cmd):
         try:
             if not line:
                 raise SyntaxError()
-            my_list = split(line)
-            dict_atri = {}
+            my_list = line.split(" ", 1)
 
-            for elem in my_list:
-                if "=" in elem:
-                    value_temp = elem.split("=")[1].replace("_", " ")
-                    try:
-                        if "." in value_temp:  # check if is posible float
-                            value = float(value_temp)
-                        else:
-                            value = int(value_temp)  # check if is posible int
-                    except:
-                        value = value_temp  # assign value how string
-
-                    dict_atri[elem.split("=")[0]] = value
-
-            f_obj = eval(my_list[0])()
-            dict_atri.update(f_obj.to_dict())
-
-            obj = eval(my_list[0])(**dict_atri)
-
+            obj = eval("{}({})".format(my_list[0],
+                                       my_list[1].replace(" ", ", ")))
             obj.save()
 
             print("{}".format(obj.id))
