@@ -46,8 +46,16 @@ class HBNBCommand(cmd.Cmd):
 
             for elem in my_list:
                 if "=" in elem:
-                    dict_atri[elem.split("=")[0]] = elem.split("=")[1]\
-                                                        .replace("_", " ")
+                    value_temp = elem.split("=")[1].replace("_", " ")
+                    try:
+                        if "." in value_temp:  # check if is posible float
+                            value = float(value_temp)
+                        else:
+                            value = int(value_temp)  # check if is posible int
+                    except:
+                        value = value_temp  # assign value how string
+
+                    dict_atri[elem.split("=")[0]] = value
 
             f_obj = eval(my_list[0])()
             dict_atri.update(f_obj.to_dict())

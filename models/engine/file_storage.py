@@ -27,7 +27,8 @@ class FileStorage:
         """
         if obj:
             try:
-                del self.__objects[obj.__class__.__name__ + "." + obj.id]
+                key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                del self.__objects[key]
                 self.save()
             except KeyError:
                 pass
