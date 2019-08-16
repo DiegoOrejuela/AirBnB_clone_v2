@@ -34,9 +34,10 @@ class Place(BaseModel, Base):
     longitude = Column(Float, nullable=True)
     amenity_ids = []
 
-    Try:
+    try:
         if os.environ["HBNB_TYPE_STORAGE"] == "db":
-            reviews = relationship('Review', cascade='save-update, merge, delete',
+            reviews = relationship('Review',
+                                   cascade='save-update, merge, delete',
                                    backref='place')
     except:
         @property
