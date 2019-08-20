@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #script that sets up your web servers for the deployment of web_static
-
 sudo apt-get update
 if ! command -v nginx > /dev/null; then
     sudo apt-get -y install nginx
@@ -19,6 +18,6 @@ echo -e "
 ln -sf /data/web_static/releases/test /data/web_static/current
 chown -R ubuntu /data
 chgrp -R ubuntu /data
-sudo sed  "38i\\
+sudo sed -i "38i\\
 \tlocation = /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n" /etc/nginx/sites-enabled/default
 sudo service nginx restart
