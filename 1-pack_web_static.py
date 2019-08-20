@@ -13,8 +13,8 @@ def do_pack():
 
     with settings(warn_only=True):
         cm = "tar -czvf versions/web_static_$(date +'%Y%m%d%H%M%S').tgz"
-        cm = cm + " /data/web_static"
-        result = local(cm, capture=True)
+        cm = cm + " web_static"
+        result = local(cm)
         if result.return_code == 0:
             list_files = os.listdir("versions")
             return list_files[0]
