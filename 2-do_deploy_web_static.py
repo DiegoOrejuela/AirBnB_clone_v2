@@ -6,3 +6,11 @@ from fabric.api import local
 def do_pack():
 	""" function do pack"""
 	return None
+
+
+def do_deploy(archive_path):
+	""" function do deploy """
+	if is not archive_path:
+		return(False)
+	else:
+		return(True)
