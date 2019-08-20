@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Prepare your web servers.
 sudo apt-get -y update
-sudo apt-get -y install --no upgrade nginx
+sudo apt-get -y install nginx
 mkdir -p /data/web_static/shared
 mkdir -p /data/web_static/releases/test
 touch /data/web_static/releases/test/index.html
