@@ -19,5 +19,5 @@ ln -sf /data/web_static/releases/test /data/web_static/current
 chown -R ubuntu /data
 chgrp -R ubuntu /data
 sudo sed -i "38i\\
-\tlocation = /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n" /etc/nginx/sites-enabled/default
+\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n" /etc/nginx/sites-enabled/default
 sudo service nginx restart
