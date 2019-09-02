@@ -44,20 +44,25 @@ class HBNBCommand(cmd.Cmd):
             my_list = split(line)
             dict_atri = {}
 
+            obj = eval(my_list[0])()
+
             for elem in my_list:
                 if "=" in elem:
-                    dict_atri[elem.split("=")[0]] = elem.split("=")[1]\
-                                                        .replace("_", " ")
-
-            f_obj = eval(my_list[0])()
-            dict_atri.update(f_obj.to_dict())
-
-            obj = eval(my_list[0])(**dict_atri)
+                    key = elem.split("=")[0]
+                    value_temp = elem.split("=")[1].replace("_", " ")
+                    try:
+                        if "." in value_temp:  # check if is posible float
+                            value = float(value_temp)
+                            setattr(obj, key, value)
+                        else:
+                            value = int(value_temp)  # check if is posible int
+                            setattr(obj, key, value)
+                    except:
+                        value = value_temp  # assign value how string
+                        setattr(obj, key, value)
 
             obj.save()
-
             print("{}".format(obj.id))
-
         except SyntaxError:
             print("** class name missing **")
         except NameError:
