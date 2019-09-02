@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This is the console for AirBnB"""
+"""This is the console for AirBnB """
 import cmd
 import models
 from datetime import datetime
