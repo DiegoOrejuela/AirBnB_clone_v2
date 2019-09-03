@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the state class"""
 import models
-import os
+from os import getenv
 from models.city import City
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
@@ -16,15 +16,16 @@ class State(BaseModel, Base):
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
 
-    try:
-        if os.environ["HBNB_TYPE_STORAGE"] == "db":
+    if getenv("HBNB_TYPE_STORAGE") == "db":
             cities = relationship("City", cascade="save-update, merge, delete",
                                   backref="state")
-    except:
+    else:
         @property
         def cities(self):
             """list all cities with relationship
             """
+            cities = []
             for key, value in models.storage.all(City).items():
                 if self.id == value.state_id:
                     cities.append(value)
+            return(cities)

@@ -12,7 +12,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
-type_class = [User, State, City, Amenity, Place, Review]
+type_class = ["User", "State", "City", "Amenity", "Place", "Review"]
 
 
 class DBStorage:
@@ -43,6 +43,12 @@ class DBStorage:
         except KeyError:
             pass
 
+    def close(self):
+        """close the session
+        Return: Nothing
+        """
+        self.__session.close()
+
     def all(self, cls=None):
         """that returns the list of objects of one type of class
         Return:
@@ -52,10 +58,11 @@ class DBStorage:
         dict_objects = {}
 
         if cls:
-            objects_list = self.__session.query(cls).all()
+            objects_list = self.__session.query(eval(cls)).all()
         else:
             for name_class in type_class:
-                objects_list.extend = self.__session.query(name_class).all()
+                objects_list.extend = self.__session.query(eval(name_class)).\
+                                      all()
 
         for obj in objects_list:
             key = "{}.{}".format(obj.__class__.__name__, obj.id)

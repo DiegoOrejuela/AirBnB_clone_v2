@@ -20,6 +20,13 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+    def close(self):
+        """close of session
+        Return:
+            Nothing
+        """
+        self.reload()
+
     def delete(self, obj=None):
         """to delete obj from __objects if it’s inside
         Return:
