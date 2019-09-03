@@ -14,7 +14,7 @@ def python(text):
 
     if "_" in text:
         text = text.replace("_", " ")
-    return "C {}".format(text)
+    return "Python {}".format(text)
 
 
 @app.route('/c/<string:text>')
