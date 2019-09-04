@@ -4,16 +4,16 @@
         <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-      {% if not states and not state %}
-        <H1>Not found!</H1>
-      {% elif states %}
+      {% if not error %}
         <H1>States</H1>
         <UL>
 	  {% for state in states %}
 	      <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
 	  {% endfor %}
         </UL>
-      {% else %}
+      {% elif not state %}
+        <H1>Not found!</H1>
+      {% elif state %}
 	<H1>State: {{ state.name }}</H1>
 	<H3>Cities:</H3>
         <UL>

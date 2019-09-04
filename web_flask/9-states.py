@@ -23,11 +23,13 @@ def cities_by_states(id):
     dict_state = storage.all("State")
     if id:
         state = dict_state.get("State." + id)
-        return render_template("9-states.html", states=None, state=state)
+        return render_template("9-states.html", states=None, state=state,
+                               error=True)
     else:
         objects = list(dict_state.values())
         objects.sort(key=lambda x: x.name)
-        return render_template("9-states.html", states=objects, state=None)
+        return render_template("9-states.html", states=objects, state=None,
+                               error=None)
 
 
 @app.route('/states_list')
