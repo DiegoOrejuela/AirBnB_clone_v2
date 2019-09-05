@@ -25,9 +25,8 @@ def states_list():
     H1 tag: States
     UL tag: with the list of all State objects present in DBStorage
     sorted by name (A->Z)"""
-    states_list = []
-    states_list = list(storage.all().values())
-    return render_template('7-states_list.html', state=states_list)
+    states_list = list(storage.all("State").values())
+    return render_template('7-states_list.html', states=states_list)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')
