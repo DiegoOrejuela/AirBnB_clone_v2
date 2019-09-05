@@ -52,7 +52,7 @@ class DBStorage:
         dict_objects = {}
 
         if cls:
-            objects_list = self.__session.query(cls).all()
+            objects_list = self.__session.query(eval(cls)).all()
         else:
             for name_class in type_class:
                 objects_list.extend = self.__session.query(name_class).all()
@@ -95,4 +95,4 @@ class DBStorage:
 
     def close(self):
         """call remove() method on the private session attribute"""
-        self.__session.remove()
+        self.__session.close()
