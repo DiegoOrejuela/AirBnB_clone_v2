@@ -47,8 +47,12 @@ class FileStorage:
         """
         if cls:
             new_dict = {}
+
+            if not type(cls) is str:
+                cls = cls.__name__
+
             for key, value in self.__objects.items():
-                if cls.__name__ in key:
+                if cls in key:
                     new_dict[key] = value
             return new_dict
         else:

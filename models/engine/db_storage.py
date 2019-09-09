@@ -58,7 +58,9 @@ class DBStorage:
         dict_objects = {}
 
         if cls:
-            objects_list = self.__session.query(eval(cls)).all()
+            if cls is str:
+                cls = eval(cls)
+            objects_list = self.__session.query(cls).all()
         else:
             for name_class in type_class:
                 objects_list.extend = self.__session.query(eval(name_class)).\
