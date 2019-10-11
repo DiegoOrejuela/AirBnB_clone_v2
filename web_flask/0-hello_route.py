@@ -9,12 +9,6 @@ from flask import Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
-
-@app.route('/')
-def hello_route():
-    """ return Hello HBNB!"""
-    return 'Hello HBNB!'
-
 @app.route('/airbnb-onepage/')
 def airbnbOnepage():
     """ return Hello HBNB! """
